@@ -1,4 +1,4 @@
-package java.config;
+package config;
 
 public enum LocalConfig implements Config{
     INSTANCE;
@@ -9,13 +9,11 @@ public enum LocalConfig implements Config{
     }
 
     @Override
-    public String usersJdbcUrl() {
-        return "http://localhost:5432/";
-    }
+    public String usersJdbcUrl() {return "jdbc:mysql://localhost:3306/mysql";}
 
     @Override
     public String dbUsername() {
-        return "secret";
+        return "root";
     }
 
     @Override

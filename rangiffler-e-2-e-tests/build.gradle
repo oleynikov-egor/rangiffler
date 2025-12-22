@@ -19,6 +19,7 @@ buildscript {
         ashotVersion = '1.5.4'
         fakerVersion = '1.0.2'
         postgresDriverVersion = '42.7.7'
+        mysqlDriverVersion='9.4.0'
         grpcVersion= '1.76.2'
         protobufVersion='4.33.0'
         jakartaJaxbVersion='4.0.4'
@@ -63,6 +64,7 @@ dependencies {
     // DB
     testImplementation "org.springframework:spring-jdbc:${springJdbcVersion}"
     testImplementation "org.postgresql:postgresql:${project.ext.postgresDriverVersion}"
+    runtimeOnly "com.mysql:mysql-connector-j:${project.ext.mysqlDriverVersion}"
     testImplementation "p6spy:p6spy:${p6spyVersion}"
     testImplementation "org.hibernate:hibernate-core:${hibernateVersion}"
     testImplementation "org.springframework.security:spring-security-crypto:${springCryptoVersion}"
@@ -104,4 +106,14 @@ dependencies {
     // Lombok
     testAnnotationProcessor "org.projectlombok:lombok:${project.ext.lombokVersion}"
     testCompileOnly "org.projectlombok:lombok:${project.ext.lombokVersion}"
+}
+
+test {
+    useJUnitPlatform()  // Включаем JUnit 5
+
+    // Показывать подробный вывод тестов
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
 }
