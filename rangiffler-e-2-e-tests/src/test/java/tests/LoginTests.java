@@ -11,18 +11,17 @@ public class LoginTests {
     private final Config config = Config.getInstance();
 
     @Test
-    public  void userShouldStayOnLoginPageAfterLoginWithBadCredentials(){
+    public void userShouldStayOnLoginPageAfterLoginWithBadCredentials() {
         Selenide.open(config.frontUrl(), AuthPage.class)
                 .loginBtnClick()
                 .setUsername("Bob")
                 .setPassword("john")
-                .loginBtnClick()
-                .mapShouldBeNotVisible();
+                .loginBtnWithBadCredentialsClick();
     }
 
     @User
     @Test
-    public  void mainPageShouldBeDisplayedAfterSuccessLogin(UserJson userJson){
+    public void mainPageShouldBeDisplayedAfterSuccessLogin(UserJson userJson) {
         Selenide.open(config.frontUrl(), AuthPage.class)
                 .loginBtnClick()
                 .setUsername(userJson.username())

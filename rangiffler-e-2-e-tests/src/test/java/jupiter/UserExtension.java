@@ -21,7 +21,7 @@ public class UserExtension implements BeforeEachCallback, ParameterResolver {
                 anno -> {
                     UserJson userJson = new UserJson(
                             Faker.instance().elderScrolls().firstName(),
-                            Faker.instance().internet().password(4,12)
+                            Faker.instance().internet().password(4, 12)
                     );
                     usersDbClient.createUser(userJson);
                     context.getStore(NAMESPACE).put(context.getUniqueId(), userJson);

@@ -10,7 +10,7 @@ public class RegistrationTests {
     private final Config config = Config.getInstance();
 
     @Test
-    void shouldRegisterNewUser(){
+    void shouldRegisterNewUser() {
         String password = Faker.instance().internet().password(4, 12);
         Selenide.open(config.frontUrl(), AuthPage.class)
                 .registerBtnClick()
@@ -22,7 +22,7 @@ public class RegistrationTests {
     }
 
     @Test
-    void shouldNotRegisterUserWithExistingUsername(){
+    void shouldNotRegisterUserWithExistingUsername() {
         String password = Faker.instance().internet().password(4, 12);
         Selenide.open(config.frontUrl(), AuthPage.class)
                 .registerBtnClick()
@@ -30,17 +30,17 @@ public class RegistrationTests {
                 .setPassword(password)
                 .setSubmitPassword(password)
                 .registrationBtnClick()
-                .existUsernameAlertVisible();
+                .existUsernameErrorVisible("Username `Bob` already exists");
     }
 
     @Test
-    void shouldShowErrorIfPasswordAndConfirmPasswordAreNotEqual(){
+    void shouldShowErrorIfPasswordAndConfirmPasswordAreNotEqual() {
         Selenide.open(config.frontUrl(), AuthPage.class)
                 .registerBtnClick()
                 .setUsername(Faker.instance().elderScrolls().firstName())
                 .setPassword(Faker.instance().elderScrolls().city())
                 .setSubmitPassword(Faker.instance().gameOfThrones().city())
                 .registrationBtnClick()
-                .notMatchPasswordAlertVisible();
+                .differentPasswordsErrorVisible();
     }
 }
